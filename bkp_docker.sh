@@ -1,6 +1,6 @@
 #!/bin/bash
 export RESTIC_REPOSITORY=/etc/restic
-export RESTIC_PASSWORD=*REST888bkp!
+export RESTIC_PASSWORD=
 BACKUP_DIR=/etc/restic/backups
 DATE=$(date +%F)
 
