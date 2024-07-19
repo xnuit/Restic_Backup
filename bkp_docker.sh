@@ -10,7 +10,7 @@ if [ ! -d "$BACKUP_DIR/restic-repo" ]; then
 fi
 
 # Créer le répertoire de sauvegarde si nécessaire
-mkdir -p $BACKUP_DIR
+# mkdir -p $BACKUP_DIR
 
 # Sauvegarder les volumes Docker
 volumes=$(docker volume ls --format '{{.Name}}')
@@ -38,6 +38,9 @@ restic backup $BACKUP_DIR/*_backup_${DATE}.tar.gz
 restic backup $BACKUP_DIR/*_config_${DATE}.json
 restic backup $BACKUP_DIR/*_image_${DATE}.tar
 
+# Nettoyer les anciennes sauvegardes (garder une semaine de sauvegardes)
+restic forget --keep-daily 7 --prune
+ 
 # Nettoyer les fichiers de sauvegarde locaux si nécessaire
 #              # rm $BACKUP_DIR/*_backup_${DATE}.tar.gz
 #              # rm $BACKUP_DIR/*_config_${DATE}.json
